@@ -13,11 +13,19 @@ function Square( { value , onSquareClick } ) {
 
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null))
+  const [xisNext, setXIsNext] = useState(true);
 
   function handleClick(i) {
+    if(squares[i]) return; // returns early if the square has X/O (not null) already
     const nextSquareState = squares.slice();
-    nextSquareState[i] = "X";
+    if(xisNext) {
+      nextSquareState[i] = "X";
+    }
+    else {
+      nextSquareState[i] = "O";
+    }
     setSquares(nextSquareState);
+    setXIsNext(!xisNext);
   }
   return(
     <>
